@@ -30,7 +30,7 @@ class _SplashState extends State<SplashPage> {
   @override
   void didUpdateWidget(SplashPage oldWidget) {
     Timer(Duration(seconds: SPLASH_DURATION), () {
-      Navigator.pushNamed(context, LIST);
+      Navigator.of(context).pushNamedAndRemoveUntil(LIST, (route) => false);
     });
   }
 }
