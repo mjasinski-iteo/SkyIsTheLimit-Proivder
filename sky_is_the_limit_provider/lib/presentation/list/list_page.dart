@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sky_is_the_limit_provider/domain/news.dart';
 import 'package:sky_is_the_limit_provider/network/articles_api.dart';
 import 'package:sky_is_the_limit_provider/style/colors.dart';
@@ -12,8 +13,16 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListState extends State<ListPage> {
+  ArticlesApi api;
   List<Article> _articles = List<Article>();
   bool _isLoading = false;
+
+
+  @override
+  void didChangeDependencies() {
+    api = Provider.of<ArticlesApi>(context);
+    _fetchArticles();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +80,9 @@ class _ListState extends State<ListPage> {
         ),
       );
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchArticles();
-  }
-
   void _fetchArticles() {
     _setIsLoading();
-    ArticlesApi().getArticles().then((articles) {
+    api.getArticles().then((articles) {
       setState(() => {_isLoading = false, _articles = articles});
     }, onError: (error) {
       _setIsNotLoading();
