@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sky_is_the_limit_provider/domain/auto_reload_timer.dart';
 import 'package:sky_is_the_limit_provider/domain/news.dart';
 import 'package:sky_is_the_limit_provider/network/articles_api.dart';
 import 'package:sky_is_the_limit_provider/style/colors.dart';
@@ -17,10 +18,16 @@ class _ListState extends State<ListPage> {
   List<Article> _articles = List<Article>();
   bool _isLoading = false;
 
-
   @override
   void didChangeDependencies() {
     api = Provider.of<ArticlesApi>(context);
+
+    final autoReload = Provider.of<AutoReloadTimer>(context);
+    autoReload.addListener(() {
+      _fetchArticles();
+    });
+    autoReload.startTimer();
+
     _fetchArticles();
   }
 
@@ -101,5 +108,11 @@ class _ListState extends State<ListPage> {
     setState(() {
       _isLoading = false;
     });
+  }
+
+  @override
+  void dispose() {
+    Provider.of<AutoReloadTimer>(context).stopTimer();
+    super.dispose();
   }
 }
