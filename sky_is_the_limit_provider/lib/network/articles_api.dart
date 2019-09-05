@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:sky_is_the_limit_provider/domain/news.dart';
 import 'package:sky_is_the_limit_provider/network/article_mapper.dart';
-import 'package:sky_is_the_limit_provider/network/consts.dart';
+import 'package:sky_is_the_limit_provider/network/keys.dart';
 
 class ArticlesApi {
   Future<List<Article>> getArticles() async {
