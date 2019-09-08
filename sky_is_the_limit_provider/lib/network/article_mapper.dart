@@ -4,5 +4,6 @@ class ArticleMapper {
   static Article fromJsonData(Map<String, dynamic> data) => Article(
       title: data['title'],
       description: data['description'],
+      content: data['content'],
       urlToImage: data['urlToImage']);
 }

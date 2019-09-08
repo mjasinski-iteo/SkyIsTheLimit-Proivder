@@ -6,12 +6,12 @@ class AutoReloadTimer extends ChangeNotifier {
   Timer _timer;
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 10), (_) {
-      notifyListeners();
-    });
+//    _timer = Timer.periodic(Duration(seconds: 10), (_) {
+//      notifyListeners();
+//    });
   }
 
   void stopTimer() {
-    _timer.cancel();
+//    _timer.cancel();
   }
 }

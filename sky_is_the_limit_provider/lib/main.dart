@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<ArticlesApi>.value(value: ArticlesApi()),
-//        ChangeNotifierProvider<AutoReloadTimer>.value(
-//            notifier: AutoReloadTimer()),
+        ChangeNotifierProvider<AutoReloadTimer>.value(
+            notifier: AutoReloadTimer()),
       ],
       child: MaterialApp(
         title: 'iteo',
